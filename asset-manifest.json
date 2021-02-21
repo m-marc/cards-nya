@@ -1,0 +1,23 @@
+{
+  "files": {
+    "main.css": "/cards-nya/static/css/main.8c8b27cf.chunk.css",
+    "main.js": "/cards-nya/static/js/main.5f280e3b.chunk.js",
+    "main.js.map": "/cards-nya/static/js/main.5f280e3b.chunk.js.map",
+    "runtime-main.js": "/cards-nya/static/js/runtime-main.840423fe.js",
+    "runtime-main.js.map": "/cards-nya/static/js/runtime-main.840423fe.js.map",
+    "static/js/2.7bb99bc2.chunk.js": "/cards-nya/static/js/2.7bb99bc2.chunk.js",
+    "static/js/2.7bb99bc2.chunk.js.map": "/cards-nya/static/js/2.7bb99bc2.chunk.js.map",
+    "static/js/3.1a8cb141.chunk.js": "/cards-nya/static/js/3.1a8cb141.chunk.js",
+    "static/js/3.1a8cb141.chunk.js.map": "/cards-nya/static/js/3.1a8cb141.chunk.js.map",
+    "index.html": "/cards-nya/index.html",
+    "static/css/main.8c8b27cf.chunk.css.map": "/cards-nya/static/css/main.8c8b27cf.chunk.css.map",
+    "static/js/2.7bb99bc2.chunk.js.LICENSE.txt": "/cards-nya/static/js/2.7bb99bc2.chunk.js.LICENSE.txt",
+    "static/media/logo.6ce24c58.svg": "/cards-nya/static/media/logo.6ce24c58.svg"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.840423fe.js",
+    "static/js/2.7bb99bc2.chunk.js",
+    "static/css/main.8c8b27cf.chunk.css",
+    "static/js/main.5f280e3b.chunk.js"
+  ]
+}
