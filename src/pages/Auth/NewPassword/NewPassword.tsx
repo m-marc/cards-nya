@@ -5,7 +5,7 @@ type Props = {}
 
 export const NewPassword = (props: Props) => {
     const history = useHistory()
-    const backHome = () => history.push("/cards-nya")
+    const backHome = () => history.push("/")
 
     return <>
         <h1>Set new password</h1>

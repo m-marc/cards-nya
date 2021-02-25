@@ -1,17 +1,17 @@
 import React from 'react';
 import './App.css';
-import {BrowserRouter} from "react-router-dom";
+import {HashRouter} from "react-router-dom";
 import {Routes} from "./routes/Routes";
 import {Header} from "./components/Header/Header";
 
 const App = () => {
   return (
-      <BrowserRouter>
+      <HashRouter>
         <div className="App">
             <Header />
             <Routes />
         </div>
-      </BrowserRouter>
+      </HashRouter>
   );
 }
 

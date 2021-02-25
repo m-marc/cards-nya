@@ -9,7 +9,7 @@ import {LostPassword} from "../pages/Auth/LostPassword/LostPassword";
 import {NewPassword} from "../pages/Auth/NewPassword/NewPassword";
 
 export enum PATH {
-    TEST = '/cards-nya',
+    TEST = '/test',
     PROFILE = '/profile',
     LOGIN = '/login',
     REGISTER = '/register',
