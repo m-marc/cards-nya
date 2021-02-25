@@ -1,0 +1,17 @@
+.superInput {
+    padding: 12px 20px;
+    margin: 8px 0;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    outline: none;
+    font: 300 20px "Roboto Mono";
+}
+
+.errorInput {
+    border-color: #e3291b;
+}
+
+.error {
+    color: #e3291b;
+}
