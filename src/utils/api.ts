@@ -1,8 +1,7 @@
 import axios from 'axios'
 
-const settings = {
-    widthCredentials: true,
-    headers: {
-        'API-KEY': ''
-    }
+const instance = axios.create({baseURL:"http://localhost:7542/2.0/"})
+
+export const AuthAPI = {
+
 }
