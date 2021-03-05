@@ -13,7 +13,7 @@ export const TestPage = () => {
     const alertHandle = () =>
         alert(`Input value is: ${value}\nCheckbox checked: ${checked}\nSelected radio/option: ${radioValue}`)
     return <>
-        <h1>Here are list of Super components:</h1>
+        <h1>Here is the list of Super components:</h1>
         <div>
             <SuperButton onClick={alertHandle}>Check status</SuperButton>
         </div>
