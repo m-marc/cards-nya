@@ -14,3 +14,14 @@ export const thunkForgotPassword = (email: string, from: string, message: string
             throw error
         }
     }
+
+export const thunkSetNewPassword = (password: string, resetPasswordToken: string) =>
+    async (dispatch: Dispatch) => {
+        try {
+            let response = await AuthAPI.newpass(password, resetPasswordToken)
+            console.log(response.data.info)
+        }
+        catch (error) {
+            throw error
+        }
+    }

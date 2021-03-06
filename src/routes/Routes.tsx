@@ -14,7 +14,7 @@ export enum PATH {
     LOGIN = '/login',
     REGISTER = '/register',
     RESET_PASS = '/lostpassword',
-    NEW_PASS = '/newpassword'
+    NEW_PASS = '/newpassword/:token'
 }
 
 export const Routes = () => {
