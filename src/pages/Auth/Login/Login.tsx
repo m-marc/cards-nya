@@ -1,11 +1,13 @@
-import React, {useState} from 'react'
-import {NavLink} from "react-router-dom";
+import React, {useEffect, useState} from 'react'
+import {NavLink, Redirect} from "react-router-dom";
 import {PATH} from "../../../routes/Routes";
-import SuperInputText from "../../../components/SuperInputText/SuperInputText";
+import SuperInputText from "../../../components/SuperInput/SuperInput";
 import SuperButton from "../../../components/SuperButton/SuperButton";
 import SuperCheckbox from "../../../components/SuperCheckbox/SuperCheckbox";
-import {useDispatch} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import {loginTC} from "../../../redux/auth/thunks";
+import {IGlobalState} from "../../../redux/store";
+import {setErrorAC} from "../../../redux/auth/actions";
 
 type Props = {}
 
@@ -13,23 +15,32 @@ export const Login = (props: Props) => {
     const [login, setLogin] = useState("")
     const [password, setPassword] = useState("")
     const [rememberMe, setRememberMe] = useState(true)
+    const error = useSelector<IGlobalState, string>(state => state.auth.error)
+    const isLoggedIn = useSelector<IGlobalState, boolean>(state => state.auth.isLoggedIn)
     const dispatch = useDispatch()
 
-    const onLoginChangeHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
-        setLogin(event.currentTarget.value)
-    };
-    const onPasswordChangeHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
-        setPassword(event.currentTarget.value)
+    const onChangeHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
+        if(error)
+            dispatch(setErrorAC(''))
+        if(event.currentTarget.type === "password") {
+            setPassword(event.currentTarget.value)
+        }
+        else {
+            setLogin(event.currentTarget.value)
+        }
     };
     const onClick = () => {
         dispatch(loginTC(login, password, rememberMe))
     };
+    if(isLoggedIn)
+        return <Redirect to={PATH.PROFILE}/>
     return (
         <>
             <h1>Login</h1>
             <div>
-                <SuperInputText value={login} onChange={onLoginChangeHandler}/>
-                <SuperInputText value={password} onChange={onPasswordChangeHandler}/>
+                {Boolean(error) && <span>{error}</span>}
+                <SuperInputText value={login} onChange={onChangeHandler}/>
+                <SuperInputText type={"password"} value={password} onChange={onChangeHandler}/>
                 <SuperCheckbox checked={rememberMe} onChangeChecked={setRememberMe}>
                     Remember me
                 </SuperCheckbox>
