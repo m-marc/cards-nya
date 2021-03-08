@@ -18,11 +18,14 @@ export const thunkForgotPassword = (email: string) =>
 
 export const thunkSetNewPassword = (password: string, resetPasswordToken: string) =>
     async (dispatch: Dispatch) => {
+        dispatch(setLoading(true))
         try {
             let response = await AuthAPI.newpass(password, resetPasswordToken)
+            dispatch(setSuccess(true))
             console.log(response.data.info)
         }
-        catch (error) {
-            throw error
+        catch (e) {
+            const error = e.response ? e.response.data.error : (e.message + ", more details in the console");
+            dispatch(setError(error))
         }
     }
