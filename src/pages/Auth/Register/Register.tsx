@@ -31,38 +31,34 @@ export const Register = (props: Props) => {
     };
 
     const validateEmail = (email: string) => {
-        const re = /\S+@\S+\.\S+/;
+        const re = /^[A-Z0-9._%+-]+@([A-Z0-9-]+\.)+[A-Z]{2,4}$/i;
         return re.test(email);
     }
 
     const onBlurValidationEmail = (event: React.FocusEvent<HTMLInputElement>) => {
         if (validateEmail(email)) {
-            setEmail(email)
             setEmailError('')
         } else {
-            if (email === '') {
-                setEmailError('Enter your email')
-            } else {
-                setEmailError('Incorrect email')
-            }
+            setEmailError('Incorrect email')
         }
     }
     const onBlurValidationPassword = (event: React.FocusEvent<HTMLInputElement>) => {
         if (password.length > 7) {
-            setPassword(password)
             setPasswordError('')
         } else {
-            if (password === '') {
-                setPasswordError('Enter your password')
-            } else {
-                setPasswordError('Password should contain more than 7 symbols')
-            }
+            setPasswordError('Password should contain more than 7 symbols')
         }
     }
 
-    const register = () => {
-        dispatch(registerTC(email, password));
-        setIsRegistered(true)
+    const register = (e: React.MouseEvent<HTMLButtonElement>) => {
+        e.preventDefault()
+        if (validateEmail(email)) {
+            dispatch(registerTC(email, password));
+            setIsRegistered(true)
+        }
+        else {
+            setEmailError('Incorrect email')
+        }
     };
 
     if (isRegistered) {
@@ -73,18 +69,18 @@ export const Register = (props: Props) => {
         <div>
             <h1>Registration</h1>
             <div>
-                <SuperInput value={email}
+                <SuperInput required value={email}
                             onChange={onEmailChangeHandler}
                             onBlur={onBlurValidationEmail}
                 />
                 <ErrorWrapper>{emailError}</ErrorWrapper>
-                <SuperInput type='password'
+                <SuperInput required type='password'
                             value={password}
                             onChange={onPasswordChangeHandler}
                             onBlur={onBlurValidationPassword}/>
                 <ErrorWrapper>{passwordError}</ErrorWrapper>
-                <SuperButton onClick={register}
-                             disabled={emailError || passwordError ? true : false}
+                <SuperButton type={"submit"} onClick={register}
+                             disabled={!!(emailError || passwordError)}
                 >submit</SuperButton>
             </div>
         </div>
