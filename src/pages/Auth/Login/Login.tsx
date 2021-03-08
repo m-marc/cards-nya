@@ -7,7 +7,8 @@ import SuperCheckbox from "../../../components/SuperCheckbox/SuperCheckbox";
 import {useDispatch, useSelector} from "react-redux";
 import {loginTC} from "../../../redux/auth/thunks";
 import {IGlobalState} from "../../../redux/store";
-import {setErrorAC} from "../../../redux/auth/actions";
+import {setError} from "../../../redux/main/appActions";
+import {selectApp} from "../../../redux/Selectors";
 
 type Props = {}
 
@@ -15,13 +16,13 @@ export const Login = (props: Props) => {
     const [login, setLogin] = useState("")
     const [password, setPassword] = useState("")
     const [rememberMe, setRememberMe] = useState(true)
-    const error = useSelector<IGlobalState, string>(state => state.auth.error)
+    const {error} = useSelector(selectApp)
     const isLoggedIn = useSelector<IGlobalState, boolean>(state => state.auth.isLoggedIn)
     const dispatch = useDispatch()
 
     const onChangeHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
         if(error)
-            dispatch(setErrorAC(''))
+            dispatch(setError(''))
         if(event.currentTarget.type === "password") {
             setPassword(event.currentTarget.value)
         }
