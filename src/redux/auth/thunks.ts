@@ -1,6 +1,6 @@
 import {Dispatch} from "redux";
 import {AuthAPI} from "../../utils/api";
-import {loginAC} from "./actions";
+import {loginAC, registerAC} from "./actions";
 import {setError, setLoading, setSuccess} from "../main/appActions";
 
 export const loginTC = (login: string, password: string, rememberMe: boolean) =>
@@ -15,6 +15,11 @@ export const loginTC = (login: string, password: string, rememberMe: boolean) =>
             dispatch(setError(error))
         }
     }
+
+export const registerTC = (email: string, password: string) => async (dispatch: Dispatch) => {
+    const response = await AuthAPI.register(email, password)
+    dispatch(registerAC(response.data.email, response.data.password))
+}
 
 export const thunkForgotPassword = (email: string) =>
     async (dispatch: Dispatch) => {
