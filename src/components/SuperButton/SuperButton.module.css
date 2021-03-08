@@ -5,12 +5,18 @@
     background-color: #1b8ce3;
     color: white;
     padding: 10px 25px;
-    margin: 10px 0;
+    margin: 10px;
     cursor: pointer;
 }
 
 .default:hover {
     background-color: #145f96;
+}
+
+.default:disabled {
+    background-color: #a9a7a7;
+    cursor: default;
+    pointer-events: none;
 }
 
 .red {
