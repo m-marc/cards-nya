@@ -1,17 +1,18 @@
 import {Dispatch} from "redux";
 import {AuthAPI} from "../../utils/api";
-import {AuthActionsType} from "./actions";
+import {setError, setLoading, setSuccess} from "../main/appActions";
 
-export const auth = () => (dispatch: Dispatch) => {}
-
-export const thunkForgotPassword = (email: string, from: string, message: string) =>
-    async (dispatch: Dispatch<AuthActionsType>) => {
+export const thunkForgotPassword = (email: string) =>
+    async (dispatch: Dispatch) => {
+        dispatch(setLoading(true))
         try {
-            let response = await AuthAPI.forgot(email, from, message)
-            console.log(response.data.info)
+            const response = await AuthAPI.forgot(email)
+            dispatch(setSuccess(true))
+            console.log(response.info)
         }
-        catch (error) {
-            throw error
+        catch (e) {
+            const error = e.response ? e.response.data.error : (e.message + ", more details in the console");
+            dispatch(setError(error))
         }
     }
 

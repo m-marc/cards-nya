@@ -2,39 +2,46 @@ import React, {useState} from 'react'
 import {useHistory} from "react-router-dom";
 import SuperButton from "../../../components/SuperButton/SuperButton";
 import SuperInput from "../../../components/SuperInput/SuperInput";
-import {useDispatch} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import {thunkForgotPassword} from "../../../redux/auth/thunks";
+import {selectApp} from "../../../redux/Selectors";
+import {Loader} from "../../../components/Loader/Loader";
 
-type Props = {}
 
-export const LostPassword = (props: Props) => {
+export const LostPassword = () => {
     const history = useHistory()
     const backHome = () => history.push("/")
-    const [email, setEmail] = useState("")
+    const [email, setEmail] = useState<string>("")
+    const [validation, setValidation] = useState("")
+    const {error, isLoading, success} = useSelector(selectApp)
     const dispatch = useDispatch()
-
+    const regExp = /^[A-Z0-9._%+-]+@([A-Z0-9-]+\.)+[A-Z]{2,4}$/i
 
     const resetPasswordHandler = (e: React.MouseEvent<HTMLButtonElement>) => {
         e.preventDefault()
-        if (email === '') {
-            alert("Email should be valid")
+        if (email === '' || !email.match(regExp)) {
+            setValidation('Email should be valid!')
         } else {
-            e.currentTarget.disabled = true
-            dispatch(thunkForgotPassword(email, "test-font-admin <max@codeart.us>",
-                `<div>Click<a href='http://localhost:3000/#/newpassword/$token$'>here</a> to recover your password</div>`))
+            setValidation('')
+            dispatch(thunkForgotPassword(email))
         }
     }
 
     return <>
         <h1>Reset password</h1>
-        <div>
-            <label htmlFor="email-reset">Enter your email</label>
-            <SuperInput id={"email-reset"} type="email" value={email}
-                        name={"email"}
-                        placeholder={"example@mail.com"}
-                        onChange={(e) => setEmail(e.target.value)} />
-            <SuperButton onClick={resetPasswordHandler}>Reset password</SuperButton>
-        </div>
+        {success
+            ? <div>We sent a recovery link to your email address: <strong>{email}</strong></div>
+            : <>
+                <div><label htmlFor="email-reset">Enter your email:</label></div>
+                <div><SuperInput id={"email-reset"} type="email" value={email}
+                                 placeholder={"example@mail.com"}
+                                 onChangeText={setEmail} /></div>
+                {isLoading ? <Loader /> : <></>}
+                <div style={{color: "red"}}>{validation}</div>
+                <div style={{color: "red"}}>{error}</div>
+                <SuperButton onClick={resetPasswordHandler} disabled={isLoading}>Reset password</SuperButton>
+            </>
+        }
         <SuperButton onClick={backHome}>Back home</SuperButton>
     </>
 }
