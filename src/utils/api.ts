@@ -28,9 +28,11 @@ const btnStyle = `border-radius: 3px;
     width: 180px;
     text-align: center;`
 
-const instance = axios.create({baseURL:"http://localhost:7542/2.0/"})
+const instance = axios.create({baseURL:"http://localhost:7542/2.0/",withCredentials: true})
 
 export const AuthAPI = {
+    authMe: () =>
+        instance.post<LoginResponseType>("auth/me",{}),
     login: (login: string, password: string, rememberMe: boolean) =>
         instance.post<LoginResponseType>("auth/login",{email: login,password,rememberMe}),
     forgot: (email: string) =>
