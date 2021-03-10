@@ -5,6 +5,7 @@ export const loginAC = (userData: UserType) => ({type: 'Auth/login', userData} a
 export const registerAC = (email: string, password: string): registerActionType => {
     return {type: 'REGISTER', email, password}
 }
+export const setUser = (userData: UserType) => ({type: 'Profile/SET_USER', userData} as const)
 
 export type registerActionType = {
     type: 'REGISTER',

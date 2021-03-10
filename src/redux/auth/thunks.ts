@@ -1,6 +1,6 @@
 import {Dispatch} from "redux";
 import {AuthAPI} from "../../utils/api";
-import {loginAC, registerAC} from "./actions";
+import {loginAC, registerAC, setUser} from "./actions";
 import {setError, setLoading, setSuccess} from "../main/appActions";
 
 export const loginTC = (login: string, password: string, rememberMe: boolean) =>
@@ -39,6 +39,19 @@ export const thunkSetNewPassword = (password: string, resetPasswordToken: string
         dispatch(setLoading(true))
         try {
             let response = await AuthAPI.newpass(password, resetPasswordToken)
+            dispatch(setSuccess(true))
+        }
+        catch (e) {
+            const error = e.response ? e.response.data.error : (e.message + ", more details in the console");
+            dispatch(setError(error))
+        }
+    }
+
+export const thunkUpdateProfile = (name: string, avatar: string) =>
+    async (dispatch: Dispatch) => {
+        try {
+            const response = await AuthAPI.updateProfile(name, avatar)
+            dispatch(setUser(response.updatedUser))
             dispatch(setSuccess(true))
         }
         catch (e) {

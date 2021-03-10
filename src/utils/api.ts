@@ -28,7 +28,7 @@ const btnStyle = `border-radius: 3px;
     width: 180px;
     text-align: center;`
 
-const instance = axios.create({baseURL:"http://localhost:7542/2.0/"})
+const instance = axios.create({baseURL:"http://localhost:7542/2.0/", withCredentials: true})
 
 export const AuthAPI = {
     login: (login: string, password: string, rememberMe: boolean) =>
@@ -41,5 +41,6 @@ export const AuthAPI = {
         }).then(r => r.data),
     newpass: (password: string, resetPasswordToken: string) =>
         instance.post(`auth/set-new-password`, {password, resetPasswordToken}).then(r => r.data),
-    register: (email: string, password: string) =>  instance.post(`auth/register`, {email, password})
+    register: (email: string, password: string) =>  instance.post(`auth/register`, {email, password}),
+    updateProfile: (name: string, avatar: string) => instance.put(`auth/me`,{name, avatar}).then(r => r.data)
 }
