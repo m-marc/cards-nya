@@ -8,7 +8,7 @@ import {useDispatch, useSelector} from "react-redux";
 import {loginTC} from "../../../redux/auth/thunks";
 import {IGlobalState} from "../../../redux/store";
 import {setError} from "../../../redux/main/appActions";
-import {selectApp} from "../../../redux/Selectors";
+import {selectApp, selectAuth} from "../../../redux/Selectors";
 
 type Props = {}
 
@@ -17,7 +17,7 @@ export const Login = (props: Props) => {
     const [password, setPassword] = useState("")
     const [rememberMe, setRememberMe] = useState(true)
     const {error} = useSelector(selectApp)
-    const isLoggedIn = useSelector<IGlobalState, boolean>(state => state.auth.isLoggedIn)
+    const {isLoggedIn} = useSelector(selectAuth)
     const dispatch = useDispatch()
 
     const onChangeHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
