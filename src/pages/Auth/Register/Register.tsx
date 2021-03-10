@@ -2,18 +2,20 @@ import React, {useCallback, useState} from 'react'
 import SuperInput from "../../../components/SuperInput/SuperInput";
 import SuperButton from "../../../components/SuperButton/SuperButton";
 import {registerTC} from "../../../redux/auth/thunks";
-import {useDispatch} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import {Redirect} from 'react-router-dom';
 import {PATH} from "../../../routes/Routes";
 import styled from "styled-components"
+import {selectAuth} from "../../../redux/Selectors";
 
 type Props = {}
 
 const ErrorWrapper = styled.div`
-color: red;
+  color: red;
 `
 
 export const Register = (props: Props) => {
+    const {isLoggedIn} = useSelector(selectAuth)
     const dispatch = useDispatch()
 
     const [email, setEmail] = useState('')
@@ -55,14 +57,16 @@ export const Register = (props: Props) => {
         if (validateEmail(email)) {
             dispatch(registerTC(email, password));
             setIsRegistered(true)
-        }
-        else {
+        } else {
             setEmailError('Incorrect email')
         }
     };
 
     if (isRegistered) {
         return <Redirect to={PATH.LOGIN}/>
+    }
+    if (isLoggedIn) {
+        return <Redirect to={PATH.PROFILE}/>
     }
 
     return (

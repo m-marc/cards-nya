@@ -11,17 +11,17 @@ import {Loader} from "./components/Loader/Loader";
 const App = () => {
     const {isLoading} = useSelector(selectApp)
     const dispatch = useDispatch()
-    useEffect(()=>{
+    useEffect(() => {
         dispatch(thunkAuthMe())
-    },[])
-  return (
-      <HashRouter>
-        <div className="App">
-            <Header />
-            {isLoading ? <Loader/> : <Routes />}
-        </div>
-      </HashRouter>
-  );
+    }, [])
+    return (
+        <HashRouter>
+            <div className="App">
+                <Header/>
+                {isLoading ? <Loader/> : <Routes/>}
+            </div>
+        </HashRouter>
+    );
 }
 
 export default App;

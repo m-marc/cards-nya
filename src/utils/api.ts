@@ -28,13 +28,13 @@ const btnStyle = `border-radius: 3px;
     width: 180px;
     text-align: center;`
 
-const instance = axios.create({baseURL:"http://localhost:7542/2.0/",withCredentials: true})
+const instance = axios.create({baseURL: "http://localhost:7542/2.0/", withCredentials: true})
 
 export const AuthAPI = {
     authMe: () =>
-        instance.post<LoginResponseType>("auth/me",{}),
+        instance.post<LoginResponseType>("auth/me", {}),
     login: (login: string, password: string, rememberMe: boolean) =>
-        instance.post<LoginResponseType>("auth/login",{email: login,password,rememberMe}),
+        instance.post<LoginResponseType>("auth/login", {email: login, password, rememberMe}),
     forgot: (email: string) =>
         axios.post(`https://neko-back.herokuapp.com/2.0/auth/forgot`, {
             email,
@@ -43,5 +43,5 @@ export const AuthAPI = {
         }).then(r => r.data),
     newpass: (password: string, resetPasswordToken: string) =>
         instance.post(`auth/set-new-password`, {password, resetPasswordToken}).then(r => r.data),
-    register: (email: string, password: string) =>  instance.post(`auth/register`, {email, password})
+    register: (email: string, password: string) => instance.post(`auth/register`, {email, password})
 }

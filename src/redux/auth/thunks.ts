@@ -43,8 +43,7 @@ export const thunkForgotPassword = (email: string) =>
         try {
             await AuthAPI.forgot(email)
             dispatch(setSuccess(true))
-        }
-        catch (e) {
+        } catch (e) {
             const error = e.response ? e.response.data.error : (e.message + ", more details in the console");
             dispatch(setError(error))
         }
@@ -56,8 +55,7 @@ export const thunkSetNewPassword = (password: string, resetPasswordToken: string
         try {
             await AuthAPI.newpass(password, resetPasswordToken)
             dispatch(setSuccess(true))
-        }
-        catch (e) {
+        } catch (e) {
             const error = e.response ? e.response.data.error : (e.message + ", more details in the console");
             dispatch(setError(error))
         }
