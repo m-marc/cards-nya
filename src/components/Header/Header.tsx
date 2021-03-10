@@ -11,6 +11,7 @@ export const Header = (props: Props) => {
             <NavLink to={PATH.TEST} activeClassName={"active"}>Home</NavLink>
             <NavLink to={PATH.PROFILE} activeClassName={"active"}>Profile</NavLink>
             <NavLink to={PATH.LOGIN} activeClassName={"active"}>Login</NavLink>
+            <NavLink to={PATH.REGISTER} activeClassName={"active"}>Sign up</NavLink>
         </header>
     )
 }

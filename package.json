@@ -10,6 +10,7 @@
     "@types/node": "^12.0.0",
     "@types/react": "^17.0.0",
     "@types/react-dom": "^17.0.0",
+    "@types/styled-components": "^5.1.7",
     "axios": "^0.21.1",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
@@ -18,8 +19,12 @@
     "react-scripts": "4.0.2",
     "redux": "^4.0.5",
     "redux-thunk": "^2.3.0",
+    "styled-components": "^5.2.1",
     "typescript": "^4.1.2",
     "web-vitals": "^1.0.1"
+  },
+  "resolutions": {
+    "styled-components": "^5"
   },
   "homepage": "https://m-marc.github.io/cards-nya",
   "scripts": {

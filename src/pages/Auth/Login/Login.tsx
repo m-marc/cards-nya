@@ -46,7 +46,6 @@ export const Login = () => {
                 <SuperButton onClick={onClick}>Login</SuperButton>
             </div>
             <NavLink to={PATH.RESET_PASS} activeClassName={"active"}>Lost password</NavLink>
-            <NavLink to={PATH.NEW_PASS} activeClassName={"active"}>New password</NavLink>
         </>
     )
 }

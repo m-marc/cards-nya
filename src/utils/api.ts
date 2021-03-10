@@ -42,5 +42,6 @@ export const AuthAPI = {
                 <div><a style="${btnStyle}" href='http://localhost:3000/#/newpassword/$token$'>Set new password</a></div>`
         }).then(r => r.data),
     newpass: (password: string, resetPasswordToken: string) =>
-        instance.post(`auth/set-new-password`, {password, resetPasswordToken}).then(r => r.data)
+        instance.post(`auth/set-new-password`, {password, resetPasswordToken}).then(r => r.data),
+    register: (email: string, password: string) =>  instance.post(`auth/register`, {email, password})
 }
