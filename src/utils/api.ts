@@ -31,8 +31,10 @@ const btnStyle = `border-radius: 3px;
 const instance = axios.create({baseURL:"http://localhost:7542/2.0/", withCredentials: true})
 
 export const AuthAPI = {
+    authMe: () =>
+        instance.post<LoginResponseType>("auth/me", {}),
     login: (login: string, password: string, rememberMe: boolean) =>
-        instance.post<LoginResponseType>("auth/login",{email: login,password,rememberMe}),
+        instance.post<LoginResponseType>("auth/login", {email: login, password, rememberMe}),
     forgot: (email: string) =>
         axios.post(`https://neko-back.herokuapp.com/2.0/auth/forgot`, {
             email,

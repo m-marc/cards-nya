@@ -1,4 +1,4 @@
-import {loginAC} from "./actions";
+import {setUser} from "./actions";
 
 export type UserType = {
     _id: string
@@ -20,7 +20,7 @@ const initialState = {
 }
 
 type initialStateType = typeof initialState
-type ActionsType = ReturnType<typeof loginAC>
+type ActionsType = ReturnType<typeof setUser>
 
 export const authReducer = (state: initialStateType = initialState, action: ActionsType): initialStateType => {
     switch (action.type) {

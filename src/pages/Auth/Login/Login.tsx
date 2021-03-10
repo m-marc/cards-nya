@@ -5,10 +5,10 @@ import SuperInputText from "../../../components/SuperInput/SuperInput";
 import SuperButton from "../../../components/SuperButton/SuperButton";
 import SuperCheckbox from "../../../components/SuperCheckbox/SuperCheckbox";
 import {useDispatch, useSelector} from "react-redux";
-import {loginTC} from "../../../redux/auth/thunks";
+import {thunkLogin} from "../../../redux/auth/thunks";
 import {IGlobalState} from "../../../redux/store";
 import {setError} from "../../../redux/main/appActions";
-import {selectApp, selectAuth} from "../../../redux/Selectors";
+import {selectApp} from "../../../redux/Selectors";
 
 type Props = {}
 
@@ -17,7 +17,7 @@ export const Login = (props: Props) => {
     const [password, setPassword] = useState("")
     const [rememberMe, setRememberMe] = useState(true)
     const {error} = useSelector(selectApp)
-    const {isLoggedIn} = useSelector(selectAuth)
+    const isLoggedIn = useSelector<IGlobalState, boolean>(state => state.auth.isLoggedIn)
     const dispatch = useDispatch()
 
     const onChangeHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -31,7 +31,7 @@ export const Login = (props: Props) => {
         }
     };
     const onClick = () => {
-        dispatch(loginTC(login, password, rememberMe))
+        dispatch(thunkLogin(login, password, rememberMe))
     };
     if(isLoggedIn)
         return <Redirect to={PATH.PROFILE}/>
@@ -48,6 +48,7 @@ export const Login = (props: Props) => {
                 <SuperButton onClick={onClick}>Login</SuperButton>
             </div>
             <NavLink to={PATH.RESET_PASS} activeClassName={"active"}>Lost password</NavLink>
+            <NavLink to={PATH.NEW_PASS} activeClassName={"active"}>New password</NavLink>
         </>
     )
 }

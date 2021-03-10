@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import SuperEditableSpan from "../../components/SuperEditableSpan/SuperEditableSpan";
 import {useDispatch, useSelector} from "react-redux";
 import {selectApp, selectAuth} from "../../redux/Selectors";
@@ -14,13 +14,7 @@ export const ProfilePage = () => {
     const [username, setUsername] = useState(userData.name || "")
     const dispatch = useDispatch()
 
-    const update = () => {
-        if (isLoading) {
-            setUsername(userData.name)
-            setAvatar(userData.avatar || "")
-        }
-        else dispatch(thunkUpdateProfile(username, avatar))
-    }
+    const update = () => dispatch(thunkUpdateProfile(username, avatar))
 
     if (!isLoggedIn) return <Redirect to={PATH.LOGIN} />
 
