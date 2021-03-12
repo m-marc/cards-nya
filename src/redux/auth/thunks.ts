@@ -20,9 +20,11 @@ export const thunkAuthMe = () =>
 
 export const thunkLogin = (login: string, password: string, rememberMe: boolean) =>
     async (dispatch: Dispatch) => {
+        dispatch(setLoading(true))
         try {
             const response = await AuthAPI.login(login, password, rememberMe)
             dispatch(setUser(response.data))
+            dispatch(setSuccess(true))
         } catch (e) {
             const error = e.response
                 ? e.response.data.error
@@ -36,6 +38,7 @@ export const thunkLogOut = () =>
         try {
             await AuthAPI.logOut()
             dispatch(logOutAC())
+            dispatch(setSuccess(true))
         } catch (e) {
             const error = e.response
                 ? e.response.data.error
@@ -45,9 +48,11 @@ export const thunkLogOut = () =>
     }
 
 export const registerTC = (email: string, password: string) => async (dispatch: Dispatch) => {
+    dispatch(setLoading(true))
     try {
         const response = await AuthAPI.register(email, password)
         dispatch(registerAC(response.data.email, response.data.password))
+        dispatch(setSuccess(true))
     } catch (e) {
         const error = e.response
             ? e.response.data.error
@@ -84,6 +89,7 @@ export const thunkSetNewPassword = (password: string, resetPasswordToken: string
 
 export const thunkUpdateProfile = (name: string, avatar: string) =>
     async (dispatch: Dispatch) => {
+        dispatch(setLoading(true))
         try {
             const response = await AuthAPI.updateProfile(name, avatar)
             dispatch(setUser(response.updatedUser))
