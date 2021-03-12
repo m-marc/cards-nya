@@ -26,9 +26,9 @@ export const LostPassword = () => {
     }
 
     useEffect(() => {
-        if (error) dispatch(setError(""))
+        dispatch(setError(""))
         return () => {dispatch(setError(""))}
-    }, [dispatch, error])
+    }, [dispatch])
 
     return <>
         <h1>Reset password</h1>
