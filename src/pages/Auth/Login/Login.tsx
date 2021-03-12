@@ -9,6 +9,7 @@ import {thunkLogin} from "../../../redux/auth/thunks";
 import {IGlobalState} from "../../../redux/store";
 import {setError} from "../../../redux/main/appActions";
 import {selectApp} from "../../../redux/Selectors";
+import {FlexWrapper} from "../../../assets/styled-components";
 
 export const Login = () => {
     const [login, setLogin] = useState("")
@@ -33,15 +34,15 @@ export const Login = () => {
     return (
         <>
             <h1>Login</h1>
-            <div>
-                {Boolean(error) && <span>{error}</span>}
+            <FlexWrapper>
                 <SuperInputText value={login} onChange={onChangeHandler}/>
                 <SuperInputText type={"password"} value={password} onChange={onChangeHandler}/>
                 <SuperCheckbox checked={rememberMe} onChangeChecked={setRememberMe}>
                     Remember me
                 </SuperCheckbox>
-                <SuperButton onClick={onClick}>Login</SuperButton>
-            </div>
+                <div>{Boolean(error) && <span style={{color: "red"}}>{error}</span>}</div>
+                <SuperButton onClick={onClick}>Submit</SuperButton>
+            </FlexWrapper>
             <NavLink to={PATH.RESET_PASS} activeClassName={"active"}>Lost password</NavLink>
         </>
     )

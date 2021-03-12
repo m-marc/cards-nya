@@ -7,6 +7,7 @@ import {Redirect} from 'react-router-dom';
 import {PATH} from "../../../routes/Routes";
 import styled from "styled-components"
 import {selectAuth} from "../../../redux/Selectors";
+import {FlexWrapper} from "../../../assets/styled-components";
 
 const ErrorWrapper = styled.div`
   color: red;
@@ -66,7 +67,7 @@ export const Register = () => {
     return (
         <div>
             <h1>Registration</h1>
-            <div>
+            <FlexWrapper>
                 <SuperInput required value={email}
                             onChange={onEmailChangeHandler}
                             onBlur={onBlurValidationEmail}
@@ -79,8 +80,8 @@ export const Register = () => {
                 <ErrorWrapper>{passwordError}</ErrorWrapper>
                 <SuperButton type={"submit"} onClick={register}
                              disabled={!!(emailError || passwordError)}
-                >submit</SuperButton>
-            </div>
+                >Submit</SuperButton>
+            </FlexWrapper>
         </div>
 
     )
