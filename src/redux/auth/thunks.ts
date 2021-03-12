@@ -2,19 +2,20 @@ import {Dispatch} from "redux";
 import {AuthAPI} from "../../utils/api";
 import {setUser, registerAC, logOutAC} from "./actions";
 import {setError, setLoading, setSuccess} from "../main/appActions";
+import {ThunkAction} from "redux-thunk";
+import {IGlobalState} from "../store";
+import {AuthActionsType} from "./reducers";
 
-export const thunkAuthMe = () =>
+export const thunkAuthMe = () : ThunkAction<Promise<void>, IGlobalState, unknown, AuthActionsType> =>
     async (dispatch: Dispatch) => {
-        dispatch(setLoading(true))
         try {
             const response = await AuthAPI.authMe()
             dispatch(setUser(response.data))
-            dispatch(setSuccess(true))
         } catch (e) {
             const error = e.response
                 ? e.response.data.error
                 : (e.message + ', more details in the console');
-            dispatch(setError(error))
+            console.log(error)
         }
     }
 
