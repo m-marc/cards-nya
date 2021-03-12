@@ -28,7 +28,7 @@ const btnStyle = `border-radius: 3px;
     width: 180px;
     text-align: center;`
 
-const instance = axios.create({baseURL: "http://localhost:7542/2.0/", withCredentials: true})
+const instance = axios.create({baseURL: "https://neko-back.herokuapp.com/2.0", withCredentials: true})
 
 export const AuthAPI = {
     authMe: () =>
