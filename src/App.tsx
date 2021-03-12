@@ -18,7 +18,7 @@ const App = () => {
         <HashRouter>
             <div className="App">
                 <Header/>
-                {isLoading ? <Loader/> : <Routes/>}
+                {isLoading ? <Loader position={"center"}/> : <Routes/>}
             </div>
         </HashRouter>
     );
