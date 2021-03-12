@@ -40,10 +40,10 @@ export const AuthAPI = {
     logOut: () => instance.delete('auth/me'),
 
     forgot: (email: string) =>
-        axios.post(`https://neko-back.herokuapp.com/2.0/auth/forgot`, {
+        instance.post(`auth/forgot`, {
             email,
             message: `<div style="font-size: 16px">Click the link below and you'll be redirected to a site where you can set a new password</div>
-                <div><a style="${btnStyle}" href='http://localhost:3000/#/newpassword/$token$'>Set new password</a></div>`
+                <div><a style="${btnStyle}" href='https://m-marc.github.io/cards-nya/#/newpassword/$token$'>Set new password</a></div>`
         }).then(r => r.data),
 
     newpass: (password: string, resetPasswordToken: string) =>
