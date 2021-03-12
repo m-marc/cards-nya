@@ -1,4 +1,4 @@
-import React, {useCallback, useState} from 'react'
+import React, {useState} from 'react'
 import SuperInput from "../../../components/SuperInput/SuperInput";
 import SuperButton from "../../../components/SuperButton/SuperButton";
 import {registerTC} from "../../../redux/auth/thunks";
@@ -8,13 +8,11 @@ import {PATH} from "../../../routes/Routes";
 import styled from "styled-components"
 import {selectAuth} from "../../../redux/Selectors";
 
-type Props = {}
-
 const ErrorWrapper = styled.div`
   color: red;
 `
 
-export const Register = (props: Props) => {
+export const Register = () => {
     const {isLoggedIn} = useSelector(selectAuth)
     const dispatch = useDispatch()
 
@@ -62,12 +60,8 @@ export const Register = (props: Props) => {
         }
     };
 
-    if (isRegistered) {
-        return <Redirect to={PATH.LOGIN}/>
-    }
-    if (isLoggedIn) {
-        return <Redirect to={PATH.PROFILE}/>
-    }
+    if (isRegistered) return <Redirect to={PATH.LOGIN}/>
+    if (isLoggedIn) return <Redirect to={PATH.PROFILE}/>
 
     return (
         <div>

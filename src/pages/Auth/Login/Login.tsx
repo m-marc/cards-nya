@@ -10,9 +10,7 @@ import {IGlobalState} from "../../../redux/store";
 import {setError} from "../../../redux/main/appActions";
 import {selectApp} from "../../../redux/Selectors";
 
-type Props = {}
-
-export const Login = (props: Props) => {
+export const Login = () => {
     const [login, setLogin] = useState("")
     const [password, setPassword] = useState("")
     const [rememberMe, setRememberMe] = useState(true)
@@ -21,8 +19,7 @@ export const Login = (props: Props) => {
     const dispatch = useDispatch()
 
     const onChangeHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
-        if(error)
-            dispatch(setError(''))
+        if(error) dispatch(setError(''))
         if(event.currentTarget.type === "password") {
             setPassword(event.currentTarget.value)
         }
@@ -30,11 +27,9 @@ export const Login = (props: Props) => {
             setLogin(event.currentTarget.value)
         }
     };
-    const onClick = () => {
-        dispatch(thunkLogin(login, password, rememberMe))
-    };
-    if(isLoggedIn)
-        return <Redirect to={PATH.PROFILE}/>
+    const onClick = () => dispatch(thunkLogin(login, password, rememberMe))
+    if(isLoggedIn) return <Redirect to={PATH.PROFILE}/>
+
     return (
         <>
             <h1>Login</h1>
@@ -48,7 +43,6 @@ export const Login = (props: Props) => {
                 <SuperButton onClick={onClick}>Login</SuperButton>
             </div>
             <NavLink to={PATH.RESET_PASS} activeClassName={"active"}>Lost password</NavLink>
-            <NavLink to={PATH.NEW_PASS} activeClassName={"active"}>New password</NavLink>
         </>
     )
 }

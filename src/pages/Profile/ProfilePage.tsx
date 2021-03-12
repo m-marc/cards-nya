@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useState} from 'react';
 import SuperEditableSpan from "../../components/SuperEditableSpan/SuperEditableSpan";
 import {useDispatch, useSelector} from "react-redux";
 import {selectApp, selectAuth} from "../../redux/Selectors";
