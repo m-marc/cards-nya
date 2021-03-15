@@ -1,35 +1,43 @@
 import React from 'react'
 import SuperButton from "../../components/SuperButton/SuperButton";
 import styled from "styled-components"
+import {Card} from "./Card";
 
 type Props = {}
 
-export const Cards = (props: Props) => {
-
-    const CardsWrapper = styled.div`
-        display: flex;
+export const CardsWrapper = styled.div`
+    display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     padding: 10px;
     `
-    const Table = styled.div`
+export const Table = styled.div`
    display: flex;
     width: 100vW;
     justify-content: space-evenly;
     align-items: center;
     background-color: #F0F5F1;
     padding: 5px;
+    font-weight: bold;
 `
-    const TableItem = styled.span`
-    display: inline-block;
+
+export const TableItem = styled.div`
+    display: block;
     width: 200px;
     height: 30px;
     &:hover{
         background-color: #eceaea;
  }
 `
+export const List = styled(Table)`
+  border: 1px solid black;
+  justify-content: space-between;
+  flex-direction: column;
+    font-weight: normal;
+`
 
+export const Cards = (props: Props) => {
 
     return (
         <>
@@ -44,14 +52,11 @@ export const Cards = (props: Props) => {
                     <SuperButton>add</SuperButton>
                 </Table>
                 <div>
-                    cards table
-                    <Table>
-                        <TableItem>new question</TableItem>
-                        <TableItem>no answer</TableItem>
-                        <TableItem>2.334553</TableItem>
-                        <TableItem>{new Date().toLocaleTimeString()}</TableItem>
-                        <TableItem>url blalba</TableItem>
-                    </Table>
+                    <List>
+                        <Card/>
+                        <Card/>
+                        <Card/>
+                    </List>
                 </div>
             </CardsWrapper>
         </>
