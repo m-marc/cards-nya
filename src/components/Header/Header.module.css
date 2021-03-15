@@ -8,3 +8,18 @@
     align-items: center;
     z-index: 1;
 }
+
+.logoutBtn {
+    background: transparent;
+    padding: 0;
+    margin: 0 10px;
+    color: #000000;
+    font-weight: 600;
+}
+
+.logoutBtn:hover,
+.logoutBtn:focus {
+    background: transparent;
+    color: #0b58ab;
+    outline: none;
+}

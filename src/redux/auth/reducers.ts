@@ -1,4 +1,4 @@
-import {loginAC} from "./actions";
+import {logOutAC, setUser} from "./actions";
 
 export type UserType = {
     _id: string
@@ -20,12 +20,14 @@ const initialState = {
 }
 
 type initialStateType = typeof initialState
-type ActionsType = ReturnType<typeof loginAC>
+export type AuthActionsType = ReturnType<typeof setUser> | ReturnType<typeof logOutAC>
 
-export const authReducer = (state: initialStateType = initialState, action: ActionsType): initialStateType => {
+export const authReducer = (state: initialStateType = initialState, action: AuthActionsType): initialStateType => {
     switch (action.type) {
         case "Auth/login":
             return {...state, userData: action.userData, isLoggedIn: true}
+        case "Auth/logout":
+            return {...state, isLoggedIn: false}
         default:
             return state
     }
