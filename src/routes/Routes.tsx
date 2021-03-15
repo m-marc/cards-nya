@@ -7,6 +7,8 @@ import {Login} from "../pages/Auth/Login/Login";
 import {Register} from "../pages/Auth/Register/Register";
 import {LostPassword} from "../pages/Auth/LostPassword/LostPassword";
 import {NewPassword} from "../pages/Auth/NewPassword/NewPassword";
+import {Packs} from "../pages/Packs/Packs";
+import {Cards} from "../pages/Packs/Cards";
 
 export enum PATH {
     TEST = '/test',
@@ -14,7 +16,9 @@ export enum PATH {
     LOGIN = '/login',
     REGISTER = '/register',
     RESET_PASS = '/lostpassword',
-    NEW_PASS = '/newpassword/:token'
+    NEW_PASS = '/newpassword/:token',
+    PACKS = '/packs',
+    CARDS = '/cards',
 }
 
 export const Routes = () => {
@@ -26,6 +30,8 @@ export const Routes = () => {
         <Route path={PATH.PROFILE} component={ProfilePage}/>
         <Route path={PATH.RESET_PASS} component={LostPassword}/>
         <Route path={PATH.NEW_PASS} component={NewPassword}/>
+        <Route path={PATH.PACKS} component={Packs}/>
+        <Route path={PATH.CARDS} component={Cards}/>
         <Route component={Error404}/>
     </Switch>
 }
