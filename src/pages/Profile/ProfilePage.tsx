@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useState} from 'react';
 import SuperEditableSpan from "../../components/SuperEditableSpan/SuperEditableSpan";
 import {useDispatch, useSelector} from "react-redux";
 import {selectApp, selectAuth} from "../../redux/Selectors";
@@ -6,6 +6,7 @@ import {Redirect} from "react-router-dom"
 import {PATH} from "../../routes/Routes";
 import userLogo from "../../assets/img/user-logo.svg";
 import {thunkUpdateProfile} from "../../redux/auth/thunks";
+import {Loader} from "../../components/Loader/Loader";
 
 export const ProfilePage = () => {
     const {isLoggedIn, userData} = useSelector(selectAuth)
@@ -35,8 +36,10 @@ export const ProfilePage = () => {
                     value={username}
                     onChangeText={setUsername}
                     onBlur={update}
+                    onEnter={update}
                     spanProps={{children: userData.name ? userData.name: "Change username"}}/>
             </div>
+            {isLoading ? <Loader /> : <></>}
         </div>
     </>
 }

@@ -1,5 +1,4 @@
 import React, {useEffect, useState} from 'react'
-import {useHistory} from "react-router-dom";
 import SuperButton from "../../../components/SuperButton/SuperButton";
 import SuperInput from "../../../components/SuperInput/SuperInput";
 import {useDispatch, useSelector} from "react-redux";
@@ -7,11 +6,9 @@ import {thunkForgotPassword} from "../../../redux/auth/thunks";
 import {selectApp} from "../../../redux/Selectors";
 import {Loader} from "../../../components/Loader/Loader";
 import {setError} from "../../../redux/main/appActions";
-
+import {FlexWrapper} from "../../../assets/styled-components";
 
 export const LostPassword = () => {
-    const history = useHistory()
-    const backHome = () => history.push("/")
     const [email, setEmail] = useState<string>("")
     const [validation, setValidation] = useState<string>("")
     const {error, isLoading, success} = useSelector(selectApp)
@@ -29,6 +26,7 @@ export const LostPassword = () => {
     }
 
     useEffect(() => {
+        dispatch(setError(""))
         return () => {dispatch(setError(""))}
     }, [dispatch])
 
@@ -36,17 +34,16 @@ export const LostPassword = () => {
         <h1>Reset password</h1>
         {success
             ? <div>We sent a recovery link to your email address: <strong>{email}</strong></div>
-            : <>
+            : <FlexWrapper>
                 <div><label htmlFor="email-reset">Enter your email:</label></div>
                 <div><SuperInput id={"email-reset"} type="email" value={email}
                                  placeholder={"example@mail.com"}
                                  onChangeText={setEmail} /></div>
                 {isLoading ? <Loader /> : <></>}
                 <div style={{color: "red"}}>{validation}</div>
-                <div style={{color: "red"}}>{error}</div>
+                <div>{Boolean(error) && <span style={{color: "red"}}>{error}</span>}</div>
                 <SuperButton onClick={resetPasswordHandler} disabled={isLoading}>Reset password</SuperButton>
-            </>
+            </FlexWrapper>
         }
-        <SuperButton onClick={backHome}>Back home</SuperButton>
     </>
 }

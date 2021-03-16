@@ -1,4 +1,4 @@
-import React, {useCallback, useState} from 'react'
+import React, {useState} from 'react'
 import SuperInput from "../../../components/SuperInput/SuperInput";
 import SuperButton from "../../../components/SuperButton/SuperButton";
 import {registerTC} from "../../../redux/auth/thunks";
@@ -6,16 +6,17 @@ import {useDispatch, useSelector} from "react-redux";
 import {Redirect} from 'react-router-dom';
 import {PATH} from "../../../routes/Routes";
 import styled from "styled-components"
-import {selectAuth} from "../../../redux/Selectors";
-
-type Props = {}
+import {selectApp, selectAuth} from "../../../redux/Selectors";
+import {FlexWrapper} from "../../../assets/styled-components";
+import {Loader} from "../../../components/Loader/Loader";
 
 const ErrorWrapper = styled.div`
   color: red;
 `
 
-export const Register = (props: Props) => {
+export const Register = () => {
     const {isLoggedIn} = useSelector(selectAuth)
+    const {isLoading} = useSelector(selectApp)
     const dispatch = useDispatch()
 
     const [email, setEmail] = useState('')
@@ -62,17 +63,13 @@ export const Register = (props: Props) => {
         }
     };
 
-    if (isRegistered) {
-        return <Redirect to={PATH.LOGIN}/>
-    }
-    if (isLoggedIn) {
-        return <Redirect to={PATH.PROFILE}/>
-    }
+    if (isRegistered) return <Redirect to={PATH.LOGIN}/>
+    if (isLoggedIn) return <Redirect to={PATH.PROFILE}/>
 
     return (
         <div>
             <h1>Registration</h1>
-            <div>
+            <FlexWrapper>
                 <SuperInput required value={email}
                             onChange={onEmailChangeHandler}
                             onBlur={onBlurValidationEmail}
@@ -83,10 +80,11 @@ export const Register = (props: Props) => {
                             onChange={onPasswordChangeHandler}
                             onBlur={onBlurValidationPassword}/>
                 <ErrorWrapper>{passwordError}</ErrorWrapper>
+                {isLoading ? <Loader /> : <></>}
                 <SuperButton type={"submit"} onClick={register}
                              disabled={!!(emailError || passwordError)}
-                >submit</SuperButton>
-            </div>
+                >Submit</SuperButton>
+            </FlexWrapper>
         </div>
 
     )

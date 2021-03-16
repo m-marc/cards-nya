@@ -1,6 +1,6 @@
-import React, {useState} from 'react'
+import React from 'react'
 import {PATH} from "../../routes/Routes";
-import {NavLink, Redirect} from "react-router-dom";
+import {NavLink} from "react-router-dom";
 import s from "./Header.module.css"
 import {useDispatch, useSelector} from "react-redux";
 import {selectAuth} from "../../redux/Selectors";
@@ -8,15 +8,10 @@ import SuperButton from "../SuperButton/SuperButton";
 import {thunkLogOut} from "../../redux/auth/thunks";
 import {Packs} from "../../pages/Packs/Packs";
 
-type Props = {}
-
-export const Header = (props: Props) => {
+export const Header = () => {
     const dispatch = useDispatch()
     const {isLoggedIn} = useSelector(selectAuth)
-    const logOut = () => {
-        alert('log out')
-        dispatch(thunkLogOut())
-    }
+    const logOut = () => dispatch(thunkLogOut())
 
 
     return (
@@ -28,7 +23,7 @@ export const Header = (props: Props) => {
                 ? <>
                     <NavLink to={PATH.PACKS} activeClassName={"active"}>Packs</NavLink>
                     <NavLink to={PATH.CARDS} activeClassName={"active"}>Cards</NavLink>
-                    <SuperButton onClick={logOut}>Log Out</SuperButton>
+                    <SuperButton onClick={logOut} className={s.logoutBtn}>Log Out</SuperButton>
                 </>
                 : <>
                     <NavLink to={PATH.LOGIN} activeClassName={"active"}>Login</NavLink>

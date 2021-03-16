@@ -45,7 +45,7 @@ const btnStyle = `border-radius: 3px;
     width: 180px;
     text-align: center;`
 
-const instance = axios.create({baseURL: "http://localhost:7542/2.0/", withCredentials: true})
+const instance = axios.create({baseURL:"http://localhost:7542/2.0/", withCredentials: true})
 
 export const AuthAPI = {
     authMe: () =>
@@ -54,14 +54,13 @@ export const AuthAPI = {
     login: (login: string, password: string, rememberMe: boolean) =>
         instance.post<LoginResponseType>("auth/login", {email: login, password, rememberMe}),
 
-    logOut: () =>
-        instance.delete('auth/me'),
+    logOut: () => instance.delete('auth/me'),
 
     forgot: (email: string) =>
-        axios.post(`https://neko-back.herokuapp.com/2.0/auth/forgot`, {
+        instance.post(`auth/forgot`, {
             email,
             message: `<div style="font-size: 16px">Click the link below and you'll be redirected to a site where you can set a new password</div>
-                <div><a style="${btnStyle}" href='http://localhost:3000/#/newpassword/$token$'>Set new password</a></div>`
+                <div><a style="${btnStyle}" href='https://m-marc.github.io/cards-nya/#/newpassword/$token$'>Set new password</a></div>`
         }).then(r => r.data),
 
     newpass: (password: string, resetPasswordToken: string) =>
