@@ -24,7 +24,7 @@ export const Table = styled.div`
 
 export const TableItem = styled.div`
     display: block;
-    width: 200px;
+    width: 260px;
     height: 30px;
     &:hover{
         background-color: #eceaea;

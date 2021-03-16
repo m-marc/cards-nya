@@ -1,28 +1,34 @@
 import React from 'react'
 import SuperButton from "../../components/SuperButton/SuperButton";
 import styled from "styled-components"
-import {List, TableItem} from "./Cards";
+import {TableItem} from "./Cards";
+import {CardPacksResponseType} from "../../utils/api";
 
-type Props = {}
+type Props = {
+    pack: CardPacksResponseType
+}
 
- const PackItem = styled.div`
+const PackItem = styled.div`
  display: flex;
 `
-
+const PackTableItem = styled(TableItem)`
+min-width: 400px;
+`
 
 export const Pack = (props: Props) => {
 
+
     return (
         <PackItem>
-            <TableItem>new Pack</TableItem>
-            <TableItem>1</TableItem>
-            <TableItem>{new Date().toLocaleTimeString()}</TableItem>
-            <TableItem>url blalba</TableItem>
+            <PackTableItem>{props.pack.name}</PackTableItem>
+            <PackTableItem>{props.pack.cardsCount}</PackTableItem>
+            <PackTableItem>{props.pack.updated}</PackTableItem>
             <div>
                 <SuperButton style={{padding: '8px'}}>delete</SuperButton>
                 <SuperButton style={{padding: '8px'}}>update</SuperButton>
                 <SuperButton style={{padding: '8px'}}>cards</SuperButton>
             </div>
+
         </PackItem>
     )
 }

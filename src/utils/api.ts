@@ -15,6 +15,23 @@ type LoginResponseType = {
 
     error?: string;
 }
+export type CardPacksResponseType = {
+    _id: string,
+    user_id: string,
+    name: string,
+    cardsCount: number,
+    created: string,
+    updated: string,
+}
+export type GetPacksResponseType = {
+    cardPacks: Array<CardPacksResponseType>,
+    cardPacksTotalCount: number,
+    maxCardsCount: number,
+    minCardsCount: number,
+    page: number,
+    pageCount: number
+}
+
 const btnStyle = `border-radius: 3px;
     background: #3aa54c;
     color: #fff;
@@ -53,4 +70,11 @@ export const AuthAPI = {
     register: (email: string, password: string) => instance.post(`auth/register`, {email, password}),
 
     updateProfile: (name: string, avatar: string) => instance.put(`auth/me`, {name, avatar}).then(r => r.data)
+}
+
+export const CardsAPI = {
+
+    getPacks: () => instance.get<GetPacksResponseType>(`cards/pack`),
+
+    addPack: (name: string) => instance.post<CardPacksResponseType>(`cards/pack`, {name})
 }
