@@ -1,7 +1,9 @@
 import {Dispatch} from "redux";
 import {CardsAPI} from "../../utils/api";
-import {setError} from "../main/appActions";
-import {addPackAC, getPacksAC} from "./packsActions";
+import {AppActionsType, setError} from "../main/appActions";
+import {getPacksAC,} from "./packsActions";
+import {ThunkAction} from "redux-thunk";
+import {IGlobalState} from "../store";
 
 export const thunkGetPacks = () =>
     async (dispatch: Dispatch) => {
@@ -16,11 +18,13 @@ export const thunkGetPacks = () =>
         }
     }
 
-export const thunkAddPack = (name: string) =>
-    async (dispatch: Dispatch) => {
+export const thunkAddPack = (name: string): ThunkAction<Promise<void>, IGlobalState, unknown, AppActionsType>=>
+    async (dispatch) => {
         try {
              await CardsAPI.addPack(name);
-            dispatch(addPackAC(name))
+            // dispatch(addPackAC(name))
+            dispatch(thunkGetPacks())
+
         } catch (e) {
             const error = e.response
                 ? e.response.data.error

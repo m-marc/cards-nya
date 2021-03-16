@@ -21,20 +21,6 @@ export const packsReducer = (state = packsInitialState, action: PacksActionsType
                 ...state,
                 ...action.packs
             }
-        case "packs/ADD_PACK":
-        //     let newPack = {
-        //     _id: 'id_test',
-        //         user_id: 'user_id_test',
-        //         name: 'new pack',
-        //         cardsCount: 2,
-        //         created: 'created test',
-        //         updated: 'updated test',
-        // }
-            return {
-                ...state,
-
-                // name: action.name
-            }
 
         default:
             return state

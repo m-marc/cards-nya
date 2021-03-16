@@ -76,5 +76,5 @@ export const CardsAPI = {
 
     getPacks: () => instance.get<GetPacksResponseType>(`cards/pack`),
 
-    addPack: (name: string) => instance.post<CardPacksResponseType>(`cards/pack`, {name})
+    addPack: (name: string) => instance.post(`cards/pack`, {cardsPack:{name}})
 }
