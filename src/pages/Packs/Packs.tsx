@@ -15,7 +15,7 @@ export const Packs = (props: Props) => {
     const dispatch = useDispatch()
     useEffect(()=> {
         dispatch(thunkGetPacks())
-    })
+    }, [])
 
     const addPack = () => {
         dispatch(thunkAddPack('newPack'))

@@ -32,6 +32,7 @@ export const packsReducer = (state = packsInitialState, action: PacksActionsType
         // }
             return {
                 ...state,
+
                 // name: action.name
             }
 
